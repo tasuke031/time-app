@@ -1,0 +1,17 @@
+.form-room {
+  height: 100px;
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.form-room-name {
+  height: 100%;
+  width: 70%;
+}
+
+.form-room-btn {
+  height: 100px;
+  width: 50px;
+}
