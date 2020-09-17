@@ -1,19 +1,9 @@
-<header>
-  <%= render "shared/header" %>
-</header>
-
 <div class="wrapper">
-  <div class="side_bar">
-    <%= render "shared/side_bar" %>
+  <div class="room-form">
+    <%= form_with model: @room, local: true do |f| %>
+      <%= f.text_field :name, class:"room-name-form", placeholder:"Type a Room Name" %>
+      <%= f.submit "作成", class:"room-btn" %>
+      <%= link_to "戻る", root_path, class:"room-back-btn" %>
+    <% end %>
   </div>
-
-  <div class="form-room">
-    <input class="form-room-name" placeholder="type a room name">
-  </div>
-  <input class="form-room-btn" type="submit" value="作成">
-
-</div>
-
-<div class="footer">
-  <%= render "shared/footer" %>
 </div>

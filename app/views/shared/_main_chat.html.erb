@@ -1,18 +1,19 @@
 <div class="chat">
 
-  <div class="form">
-    <div class="form-left">
-      <input class="form-name" placeholder="type a name">
-      <input class="form-message" placeholder="type a message">
-    </div>
-    <div class="form-right">
-      <input class="form-image"  type="file" value="画像">
-      <input class="form-submit" type="submit" value="投稿">
-    </div>
-  </div>
+    <%= form_with model: @chat, class:"form", local: true do |f| %>
 
-chat
+      <div class="form-left">
+        <%= f.text_field :name, class:"form-name", placeholder:"Type a Name" %>
+        <%= f.text_area :message, class:"form-message", placeholder:"Type a Message" %>
+      </div>
 
+      <div class="form-right">
+        <%= f.file_field :image, class:"form-image" %>
+        <%= f.submit "投稿", class:"form-submit" %>
+      </div>
+
+    <% end %>
+    
   <div class="chat-name">
   name
   </div>

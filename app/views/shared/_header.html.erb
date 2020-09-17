@@ -4,23 +4,13 @@
   </div>
   
   <div class="room">
-    <div class="room-btn">
-      <a href="/rooms/new">ルーム作成</a>
-    </div>
-
-    <div class="vip-room-btn">
-      <a href="#">VIPルーム作成</a>
-    </div>
+    <%= link_to "ルーム作成", new_room_path, class:"room-btn" %>
+    <%= link_to "VIPルーム作成", root_path, class:"vip-room-btn" %>
   </div>
 
   <div class="sign">
-    <div class="sign-up-btn">
-      <a href="#">Sign up</a>
-    </div>
-
-    <div class="sign-in-btn">
-      <a href="#">Sign in</a>
-    </div>
+    <%= link_to "Sign up", root_path, class:"sign-up-btn" %>
+    <%= link_to "Sign in", root_path, class:"sign-in-btn" %>
   </div>
 
 </div>

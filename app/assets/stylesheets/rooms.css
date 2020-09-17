@@ -10,3 +10,8 @@
   width: 200px;
   height: 100vh;
 }
+.main-chat {
+  background-color: lightsalmon;
+  width: calc(100% - 200px);
+  height: 100vh;
+}
