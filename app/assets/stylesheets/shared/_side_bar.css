@@ -1,0 +1,11 @@
+.room-wrapper {
+  padding: 30px;
+}
+
+.room-lists {
+  overflow: scroll;
+}
+
+.list li{
+  padding-top: 20px;
+}

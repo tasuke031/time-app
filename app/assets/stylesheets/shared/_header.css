@@ -1,0 +1,46 @@
+.header {
+  background-color: lightslategray;
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  font-size: 25px;
+}
+
+.room {
+  display: flex;
+  text-align: start;
+}
+
+.room a {
+  text-decoration: none;
+}
+
+.room-btn {
+  padding: 20px;
+}
+
+.vip-room-btn {
+  padding: 20px;
+}
+
+.sign {
+  display: flex;
+  padding: 50px 50px 10px 0;
+}
+
+.sign a {
+  text-decoration: none;
+}
+
+.sign-in-btn {
+  padding: 20px;
+}
+
+.sign-up-btn {
+  padding: 20px;
+}
