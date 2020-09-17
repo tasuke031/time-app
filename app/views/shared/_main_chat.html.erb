@@ -1,9 +1,9 @@
 <div class="chat">
 
-    <%= form_with model: @chat, class:"form", local: true do |f| %>
+    <%= form_with model: [@room, @chat],url: room_chats_path, class:"form", local: true do |f| %>
 
       <div class="form-left">
-        <%= f.text_field :name, class:"form-name", placeholder:"Type a Name" %>
+        <%= f.text_field :nickname, class:"form-name", placeholder:"Type a Name" %>
         <%= f.text_area :message, class:"form-message", placeholder:"Type a Message" %>
       </div>
 
@@ -13,13 +13,16 @@
       </div>
 
     <% end %>
-    
-  <div class="chat-name">
-  name
-  </div>
-
-  <div class="image">
-  image
-  </div>
-
+  
+  <% @chats.each do |chat| %>
+    <div class="chat-name">
+      <%= chat.nickname %>
+    </div>
+    <div class="chat-message">
+      <%= chat.message %>
+    </div>
+    <div class="image">
+      <%= chat.image %>
+    </div>
+  <% end %>
 </div>
