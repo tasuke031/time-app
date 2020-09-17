@@ -4,13 +4,13 @@ class ChatsController < ApplicationController
     @room = Room.find(params[:room_id])
     @rooms = Room.all
     @chat = Chat.new
-    @chats = Chat.all
+    @chats = @room.chats.includes(:room)
   end
 
   def create
     @chat = Chat.new(chat_params)
     if @chat.save
-      redirect_to root_path
+      redirect_to room_chats_path
     else
       render :index
     end
