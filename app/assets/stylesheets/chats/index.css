@@ -24,10 +24,6 @@
   display: flex;
 }
 
-.chat-lower {
-  display: flex;
-}
-
 .back-btn {
   color: black;
   text-decoration: none;

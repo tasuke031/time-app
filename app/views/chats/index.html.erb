@@ -1,32 +1,37 @@
 <div class="chat-header">
-  <%= @room.name %>
+  <strong><%= @room.name %></strong>
 </div>
 
 <div class="chat-form">
 
-    <%= form_with model: [@room, @chat],url: room_chats_path, local: true do |f| %>
+    <%= form_with model: [@room, @chat], id: "form", local: true do |f| %>
 
-      <div class="form">
-        <%= f.text_field :nickname, class:"form-name", placeholder:"Type a Name" %>
-        <%= f.text_area :message, class:"form-message", placeholder:"Type a Message" %>
+      <div class="form" data-id=<%= @room.id%>>
+        <%= f.text_field :nickname, class:"form-name", placeholder:"Type a Name", id:"name" %>
+        <%= f.text_area :message, class:"form-message", placeholder:"Type a Message", id:"message" %>
 
-        <%= f.file_field :image, class:"form-image" %>
-        <%= f.submit "投稿", class:"form-submit" %>
-        <%= link_to "戻る", root_path, class: "back-btn" %>
+        <%= f.file_field :image, class:"form-image", id:"image" %>
+        <%= f.submit "投稿", class:"form-submit", id:"submit" %>
+        <%= link_to "戻る", root_path, class: "back-btn", id:"btn" %>
       </div>
     <% end %>
+ 
+<div id="list">
+</div>
 
 </div>
 <div class="chat-main">
   <% @chats.each do |chat| %>
-    <div class="chat-upper">
-      <%= chat.nickname %>
-      <%= chat.created_at %>
+    <div class="chat-upper" >
+      名前:<%= chat.nickname %> 投稿日時:<%= chat.created_at %>
     </div>
-
     <div class="chat-lower">
-      <%= chat.message %>
-      <%= chat.image %>
+      <div>
+        <%= chat.message %>
+      </div>
+      <% if chat.image? %>
+        <%= image_tag chat.image.url %>
+      <% end %>
     </div>
   <% end %>
 </div>
