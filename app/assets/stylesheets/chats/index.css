@@ -1,0 +1,25 @@
+.chat-header {
+  height: 50px;
+  width: 100vw;
+  font-size: 30px;
+  background-color: rgb(158, 209, 226);
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.chat-form {
+  height: 70px;
+  background-color: rgb(129, 151, 151);
+}
+
+.chat-upper {
+  display: flex;
+}
+
+.back-btn {
+  color: black;
+  text-decoration: none;
+}

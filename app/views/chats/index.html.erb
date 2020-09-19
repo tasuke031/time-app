@@ -1,12 +1,34 @@
-<header>
-  <%= render "shared/header" %>
-</header>
+<div class="chat-header">
+  <strong><%= @room.name %></strong>
+</div>
 
-<div class="wrapper">
-  <div class="side-bar">
-    <%= render "shared/side_bar" %>
-  </div>
-  <div class="main-chat">
-    <%= render "shared/main_chat" %>
-  </div>
+<div class="chat-form">
+  <%= form_with model: [@room, @chat], id: "form", local: true do |f| %>
+    <div class="form" data-id=<%= @room.id%>>
+      <%= f.text_field :nickname, class:"form-name", placeholder:"Type a Name", id:"name" %>
+      <%= f.text_area :message, class:"form-message", placeholder:"Type a Message", id:"message" %>
+      <%= f.file_field :image, class:"form-image", id:"image" %>
+      <%= f.submit "投稿", class:"form-submit", id:"submit" %>
+      <%= link_to "戻る", root_path, class: "back-btn", id:"btn" %>
+    </div>
+  <% end %>
+</div>
+
+<div id="list">
+</div>
+
+<div class="chat-main">
+  <% @chats.each do |chat| %>
+    <div class="chat-upper" >
+      名前: <%= chat.nickname %> 投稿日時: <%= chat.created_at %>
+    </div>
+    <div class="chat-lower">
+      <div>
+        <%= chat.message %>
+      </div>
+      <% if chat.image? %>
+        <%= image_tag chat.image.url %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
