@@ -2,18 +2,19 @@ class ChatsController < ApplicationController
   
   def index
     @room = Room.find(params[:room_id])
-    @rooms = Room.all
     @chat = Chat.new
     @chats = @room.chats.includes(:room).order(id: "DESC")
+    if (@room.created_at < Time.now - (1.minutes))
+      Room.destroy_by("created_at < ?", Time.now - (1.minutes))
+      redirect_to root_path
+    end
   end
 
   def create
     @chat = Chat.create(chat_params)
-
     render json:{ chat: @chat }
-
   end
-  
+
   private
 
   def chat_params

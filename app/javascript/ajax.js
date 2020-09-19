@@ -19,21 +19,40 @@ function ajax() {
       const list = document.getElementById("list");
       const formText = document.getElementById("message");
       const formName = document.getElementById("name");
+      const formImage = document.getElementById("image")
+      const imageAttr = formImage.getAttribute("type")
       const HTML = `
         <div class="chat-main" data-id=${item.id}>
           <div class="chat-upper">
-            名前:${item.name} 投稿日時：${item.created_at}
+            名前: ${item.nickname} 投稿日時: ${item.created_at}
           </div>
           <div class="chat-lower">
             <div>
               ${item.message}
             </div>
-            <img src = ${item.image.url}>
+              <img src = ${item.image.url}>
           </div>
         </div>`;
+      const noImageHTML = `
+      <div class="chat-main" data-id=${item.id}>
+        <div class="chat-upper">
+          名前: ${item.nickname} 投稿日時: ${item.created_at}
+        </div>
+        <div class="chat-lower">
+          <div>
+            ${item.message}
+          </div>
+        </div>
+      </div>`;
+      if (item.image) {
       list.insertAdjacentHTML("afterend", HTML);
-      formName.value = item.name;
+      } else {
+        list.insertAdjacentHTML("afterend", noImageHTML);
+      }
+
+      formName.value = item.nickname;
       formText.value = "";
+      imageAttr.value = "";
     };
     e.preventDefault();
   });

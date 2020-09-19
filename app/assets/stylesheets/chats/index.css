@@ -15,11 +15,6 @@
   background-color: rgb(129, 151, 151);
 }
 
-.chat-main {
-  height: calc(100vh - 120px);
-  background-color: rgb(241, 195, 202);
-}
-
 .chat-upper {
   display: flex;
 }

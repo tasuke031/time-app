@@ -1,7 +1,7 @@
 <div class="room-wrapper">
 side_bar
   <div class="room-lists">
-    <%= @rooms.each do |room| %>
+    <% @rooms.each do |room| %>
       <div class="list">
         <%= link_to room.name, room_chats_path(room) %>
       </div>
