@@ -2,21 +2,33 @@
   height: 50px;
   width: 100vw;
   font-size: 30px;
+  padding-left: 20px;
   background-color: rgb(158, 209, 226);
+}
+
+.chat-room {
+  display: flex;
+}
+
+.chat-form {
+  height: 70px;
+  margin: 20px 0 0 20px;
 }
 
 .form {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-.chat-form {
-  height: 70px;
-  background-color: rgb(129, 151, 151);
-}
 
 .chat-upper {
   display: flex;
+}
+
+.form-submit {
+  height: 40px;
+  width: 50px;
 }
 
 .back-btn {

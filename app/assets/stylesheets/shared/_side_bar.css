@@ -3,5 +3,6 @@
 }
 
 .room-lists {
+  font-size: 25px;
   overflow: scroll;
 }

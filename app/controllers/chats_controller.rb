@@ -1,10 +1,11 @@
 class ChatsController < ApplicationController
   
   def index
+    @rooms = Room.all
     @room = Room.find(params[:room_id])
     @chat = Chat.new
     @chats = @room.chats.includes(:room).order(id: "DESC")
-    if (@room.created_at < Time.now - (1.minutes))
+    if (@room.created_at < Time.now - (1.hours))
       Room.destroy_by("created_at < ?", Time.now - (1.minutes))
       redirect_to root_path
     end
