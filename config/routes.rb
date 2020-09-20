@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   resources :rooms, only: [:index, :new, :create, :destroy] do
     resources :chats, only: [:index, :create]
   end
+  get 'rooms/:room_id/chats', to: 'chats#index'
   post 'rooms/:room_id/chats', to: 'chats#create'
 end

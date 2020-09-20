@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="room-form">
     <%= form_with model: @room, local: true do |f| %>
-      <%= f.text_field :name, class:"room-name-form", placeholder:"Type a Room Name" %>
+      <%= f.text_field :name, class:"room-name-form", placeholder:"Type a Room Name", autofocus: true %>
       <%= f.submit "作成", class:"room-btn" %>
       <%= link_to "戻る", root_path, class:"room-back-btn" %>
     <% end %>

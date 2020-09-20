@@ -30,26 +30,9 @@ function ajax() {
             <div>
               ${item.message}
             </div>
-              <img src = ${item.image.url}>
+              <img src = ${item.image.url} alt="">
           </div>
         </div>`;
-      const noImageHTML = `
-      <div class="chat-main" data-id=${item.id}>
-        <div class="chat-upper">
-          名前: ${item.nickname} 投稿日時: ${item.created_at}
-        </div>
-        <div class="chat-lower">
-          <div>
-            ${item.message}
-          </div>
-        </div>
-      </div>`;
-      if (item.image) {
-      list.insertAdjacentHTML("afterend", HTML);
-      } else {
-        list.insertAdjacentHTML("afterend", noImageHTML);
-      }
-
       formName.value = item.nickname;
       formText.value = "";
       imageAttr.value = "";
@@ -57,4 +40,4 @@ function ajax() {
     e.preventDefault();
   });
  }
- window.addEventListener("load", ajax);
+window.addEventListener("load", ajax);
