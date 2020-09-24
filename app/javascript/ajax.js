@@ -33,10 +33,12 @@ function ajax() {
               <img src = ${item.image.url} alt="">
           </div>
         </div>`;
+      list.insertAdjacentHTML("afterend", HTML);
       formName.value = item.nickname;
       formText.value = "";
       imageAttr.value = "";
     };
+
     e.preventDefault();
   });
  }

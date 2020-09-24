@@ -9,6 +9,7 @@ class ChatsController < ApplicationController
       Room.destroy_by("created_at < ?", Time.now - (1.minutes))
       redirect_to root_path
     end
+
   end
 
   def create

@@ -14,8 +14,8 @@
 
   <div class="chat-form">
     <%= form_with model: [@room, @chat], id: "form", local: true do |f| %>
-      <div class="form" data-id=<%= @room.id%>>
-        <%= f.text_field :nickname, class:"form-name", placeholder:"Type a Name", id:"name", autofocus: true %>
+      <div class="form" data-id=<%= @room.id%> >
+        <%= f.text_field :nickname, class:"form-name btn-block", placeholder:"Type a Name", id:"name", autofocus: true %>
         <%= f.text_area :message, class:"form-message", placeholder:"Type a Message", id:"message" %>
         <%= f.file_field :image, class:"form-image", id:"image" %>
         <%= f.submit "投稿", class:"form-submit", id:"submit" %>
@@ -28,7 +28,7 @@
 
     <div class="chat-main">
       <% @chats.each do |chat| %>
-        <div class="chat-upper" >
+        <div class="chat-upper" chat-id=<%= chat.id %> >
           名前: <%= chat.nickname %> 投稿日時: <%= chat.created_at %>
         </div>
         <div class="chat-lower">
@@ -45,3 +45,4 @@
   </div>
 
 </div>
+
