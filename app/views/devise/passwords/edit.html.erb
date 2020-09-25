@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= f.label :password, t('.new_password') %>
-    <%= f.password_field :password, autofocus: true, class: 'form-control'  %>
+    <%= f.password_field :password, autofocus: true, class: 'form-control', required: true, minlength: @minimum_password_length, maxlength: '30'  %>
 
     <% if @minimum_password_length %>
     <small
