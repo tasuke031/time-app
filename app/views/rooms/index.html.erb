@@ -1,0 +1,11 @@
+<%= render 'shared/flash_messages' %>
+
+<%= render 'shared/form' %>
+
+<div class="container-form">
+  <% @rooms.each do |room| %>
+  <div class="alert alert-light">
+    <%= link_to room.name, room_path(room) %>
+  </div>
+  <% end %>
+</div>

@@ -16,7 +16,7 @@
 
  @import "bootstrap/scss/bootstrap";
 
- .container-login {
+ .container-form {
   @extend .container-fluid;
   max-width: 576px;
   padding: 2rem;
@@ -30,4 +30,9 @@
 
 .alert-alert {
   @extend .alert-danger;
+}
+
+.alert {
+  font-size: 25px;
+  text-align: center;
 }

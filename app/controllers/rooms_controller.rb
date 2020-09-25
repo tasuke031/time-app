@@ -1,13 +1,15 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!
-  def index
-  end
+  before_action :authenticate_user!, expect: :index
 
-  def new
-    
+  def index
+    @rooms = Room.all.order(:id)
   end
 
   def create
+    unless user_signed_in?
+      redirect_to new_session_path
+    end
+
     @room = Room.new(room_params)
     if @room.save
       redirect_to root_path
@@ -15,6 +17,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @room = Room.find(params[:id])
   end
 
   def destroy
