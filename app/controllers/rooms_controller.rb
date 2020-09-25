@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, expect: :index
 
   def index
-    @rooms = Room.all.order(:id)
+    @rooms = Room.all.order(id: 'desc')
   end
 
   def create
