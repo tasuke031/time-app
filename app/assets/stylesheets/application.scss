@@ -49,3 +49,13 @@ footer {
   margin: 0 auto;
   background-color: white;
 }
+
+.btn-primary.disabled {
+  background-color: grey;
+  border-color: grey;
+  cursor: auto;
+}
+
+#message_content {
+  resize: none;
+}
