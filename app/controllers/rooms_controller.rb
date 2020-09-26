@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, expect: :index
 
   def index
+    @room = Room.new
     @rooms = Room.all.order(id: 'desc')
   end
 
@@ -18,6 +19,8 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    @messages = @room.messages.includes(:user)
+    @message = current_user.messages.build
   end
 
   def destroy
@@ -27,7 +30,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name)
+    params.require(:room).permit(:name,)
   end
 
 end

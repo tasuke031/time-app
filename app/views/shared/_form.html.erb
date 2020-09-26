@@ -1,5 +1,5 @@
 <div class="container-form">
-  <%= form_with model: Room.new, local: true do |f| %>
+  <%= form_with model: @room, local: true do |f| %>
   <div class="input-group mb-3">
     <%= f.text_field :name, class:"form-control", placeholder: 'ルーム名を入力してください', aria_label:"Recipient's username", aria_describedby:"button-addon2", required: true %>
     <div class="input-group-append">
