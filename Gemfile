@@ -61,3 +61,9 @@ gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 1.0'
 
 gem 'faker'
+
+gem 'pry-rails'
+
+group :production do
+  gem 'rails_12factor'
+end
