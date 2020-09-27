@@ -4,6 +4,11 @@ class RoomsController < ApplicationController
   def index
     @room = Room.new
     @rooms = Room.all.order(id: 'desc')
+    @time_upped_rooms = Room.where("created_at < ?", Time.now - (1.minutes))
+    if @time_upped_rooms.present?
+      @time_upped_rooms.destroy_all
+      redirect_to root_path, notice: "Rooms time up!!"
+    end
   end
 
   def create
@@ -18,13 +23,13 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
-    @messages = @room.messages.includes(:user).order(id: 'desc')
-    @message = current_user.messages.build
-  end
-
-  def destroy
-    
+    begin
+      @room = Room.find(params[:id])
+      @messages = @room.messages.includes(:user).order(id: 'desc')
+      @message = current_user.messages.build
+    rescue# => exception
+      redirect_to root_path, notice: 'Rooms time up!!'
+    end
   end
 
   private
