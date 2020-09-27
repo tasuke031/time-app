@@ -24,8 +24,8 @@ class RoomsController < ApplicationController
   end
 
   def show_additionally
-    last_id = params[:oldest_message_id].to_i - 1
     @room = Room.find(params[:id])
+    last_id = params[:oldest_message_id].to_i - 1
     @messages = @room.messages.includes(:user).order(:id).where(id: 1..last_id).last(50)
   end
 
@@ -36,7 +36,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name,)
+    params.require(:room).permit(:name)
   end
 
 end
