@@ -5,6 +5,4 @@ Rails.application.routes.draw do
   resources :rooms, only: [:index, :create, :show, :destroy] do
     resources :messages, only: :create
   end
-
-  get '/show_additionally', to: 'rooms#show_additionally'
 end

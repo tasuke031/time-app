@@ -20,7 +20,7 @@ document.addEventListener('turbolinks:load', () => {
 
         received(data) {
             // サーバー側から受け取ったHTMLを一番最後に加える
-            messageContainer.insertAdjacentHTML('beforeend', data['message'])
+            messageContainer.insertAdjacentHTML('afterbegin', data['message'])
         }
     })
 
@@ -28,12 +28,12 @@ document.addEventListener('turbolinks:load', () => {
     // js.erb 内でも使用できるように変数を決定
     window.messageContent = document.getElementById('message_content')
     // 一番下まで移動する関数。js.erb 内でも使用できるように変数を決定
-    window.scrollToBottom = () => {
-        window.scroll(0, documentElement.scrollHeight)
-    }
+    //window.scrollToBottom = () => {
+        //window.scroll(0, documentElement.scrollHeight)
+    //}
 
     // 最初にページ一番下へ移動させる
-    scrollToBottom()
+    //scrollToBottom()
 
     const messageButton = document.getElementById('message-button')
 
@@ -98,22 +98,4 @@ document.addEventListener('turbolinks:load', () => {
         }
         footerHeight = newFooterHeight
     }
-    let oldestMessageId
-
-    window.showAdditionally = true
-
-    window.addEventListener('scroll', () => {
-      if (documentElement.scrollTop === 0 && showAdditionally) {
-        showAdditionally = false
-
-        oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
-
-        $.ajax({
-          type: 'GET',
-          url: '/show_additionally',
-          cache: false,
-          data: {oldest_message_id: oldestMessageId, remote: true}
-        })
-      }
-    }, {passive: true})
 })
