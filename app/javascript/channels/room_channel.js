@@ -20,7 +20,7 @@ document.addEventListener('turbolinks:load', () => {
 
         received(data) {
             // サーバー側から受け取ったHTMLを一番最後に加える
-            messageContainer.insertAdjacentHTML('afterbegin', data['message'])
+            messageContainer.insertAdjacentHTML('beforeend', data['message'])
         }
     })
 
@@ -28,12 +28,12 @@ document.addEventListener('turbolinks:load', () => {
     // js.erb 内でも使用できるように変数を決定
     window.messageContent = document.getElementById('message_content')
     // 一番下まで移動する関数。js.erb 内でも使用できるように変数を決定
-    //window.scrollToBottom = () => {
-        //window.scroll(0, documentElement.scrollHeight)
-    //}
+    window.scrollToBottom = () => {
+        window.scroll(0, documentElement.scrollHeight)
+    }
 
     // 最初にページ一番下へ移動させる
-    //scrollToBottom()
+    scrollToBottom()
 
     const messageButton = document.getElementById('message-button')
 
@@ -98,4 +98,26 @@ document.addEventListener('turbolinks:load', () => {
         }
         footerHeight = newFooterHeight
     }
+
+  let oldestMessageId
+  // メッセージの追加読み込みを可否を決定する変数
+  window.showAdditionally = true
+
+  window.addEventListener('scroll', () => {
+    if (documentElement.scrollTop === 0 && showAdditionally) {
+      showAdditionally = false
+      // 表示済みのメッセージの内，最も古いidを取得
+      oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
+      
+      const formClass = document.querySelector(".form-group");
+      const roomId = formClass.getAttribute("room-id");
+      // Ajax を利用してメッセージの追加読み込みリクエストを送る。最も古いメッセージidも送信しておく。
+      $.ajax({
+        type: 'GET',
+        url: `/rooms/${roomId}/show_additionally`,
+        cache: false,
+        data: {oldest_message_id: oldestMessageId, remote: true}
+      })
+    }
+  }, {passive: true});
 })
