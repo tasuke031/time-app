@@ -5,4 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :messages, dependent: :destroy
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.name = Faker::Name.first_name
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
 end
