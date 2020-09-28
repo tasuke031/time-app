@@ -98,22 +98,26 @@ document.addEventListener('turbolinks:load', () => {
         }
         footerHeight = newFooterHeight
     }
-    let oldestMessageId
 
-    window.showAdditionally = true
+  let oldestMessageId
+  // メッセージの追加読み込みを可否を決定する変数
+  window.showAdditionally = true
 
-    window.addEventListener('scroll', () => {
-      if (documentElement.scrollTop === 0 && showAdditionally) {
-        showAdditionally = false
-
-        oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
-
-        $.ajax({
-          type: 'GET',
-          url: '/show_additionally',
-          cache: false,
-          data: {oldest_message_id: oldestMessageId, remote: true}
-        })
-      }
-    }, {passive: true})
+  window.addEventListener('scroll', () => {
+    if (documentElement.scrollTop === 0 && showAdditionally) {
+      showAdditionally = false
+      // 表示済みのメッセージの内，最も古いidを取得
+      oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
+      
+      const formClass = document.querySelector(".form-group");
+      const roomId = formClass.getAttribute("room-id");
+      // Ajax を利用してメッセージの追加読み込みリクエストを送る。最も古いメッセージidも送信しておく。
+      $.ajax({
+        type: 'GET',
+        url: `/rooms/${roomId}/show_additionally`,
+        cache: false,
+        data: {oldest_message_id: oldestMessageId, remote: true}
+      })
+    }
+  }, {passive: true});
 })
