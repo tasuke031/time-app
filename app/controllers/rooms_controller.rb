@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     @time_upped_rooms = Room.where("created_at < ?", Time.now - (24.hours))
     if @time_upped_rooms.present?
       @time_upped_rooms.destroy_all
-      redirect_to root_path, notice: "Rooms timed up!!"
+      redirect_to root_path, notice: "Room's over!!"
     end
   end
 
@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
       @messages = @room.messages.includes(:user).order(:id).last(100)
       @message = current_user.messages.build
     rescue# => exception
-      redirect_to root_path, notice: 'Rooms timed up!!'
+      redirect_to root_path, notice: "Room's over!!"
     end
   end
 
