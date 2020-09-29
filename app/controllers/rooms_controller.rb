@@ -23,18 +23,16 @@ class RoomsController < ApplicationController
   end
 
   def show
-    begin
       @room = Room.find(params[:id])
       @messages = @room.messages.includes(:user).order(:id).last(100)
       @message = current_user.messages.build
-    rescue# => exception
+    rescue
       redirect_to root_path, notice: "Room's over!!"
-    end
   end
 
   def show_additionally
-    last_id = params[:oldest_message_id].to_i - 1
     @room = Room.find(params[:id])
+    last_id = params[:oldest_message_id].to_i - 1
     @messages = @room.messages.includes(:user).order(id: 'desc').where(id:1..last_id).last(50)
   end
 
