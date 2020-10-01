@@ -86,6 +86,6 @@ ___
 * Mysql2 0.4.4
 
 #### 手順
-1. git clone https://github.com/tasuke031/time-app.git
+1. `git clone https://github.com/tasuke031/time-app.git`
 2. rails db:create
 3. rails s
