@@ -20,6 +20,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'ユーザー登録ができない場合' do
+      # ユーザー名を入力しないで登録しようとした場合バリデーションにより登録できないことをテスト
       it 'nameが空だと登録できない' do
         # userのnameを空に更新
         @user.name = nil
@@ -65,6 +66,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'passwordが正しくてもpassword_confirmationが一致しないと登録できない' do
+        # こちらはnilにするとテストにパスしなくなります""でないといけません
         @user.password_confirmation = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("パスワード（確認用）とパスワードの入力が一致しません")
