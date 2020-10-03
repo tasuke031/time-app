@@ -66,6 +66,9 @@ gem 'faker'
 
 gem 'pry-rails'
 
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'
+
 group :production do
   gem 'rails_12factor'
 end

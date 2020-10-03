@@ -2,6 +2,13 @@ import consumer from "./consumer"
 
 document.addEventListener('turbolinks:load', () => {
 
+    $(document).on('change', ':file', function() {
+    var input = $(this),
+    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.parent().parent().next(':text').val(label);
+});
+
     window.messageContainer = document.getElementById('message-container')
 
     if (messageContainer === null) {
@@ -29,9 +36,10 @@ document.addEventListener('turbolinks:load', () => {
     scrollToBottom()
 
     const messageButton = document.getElementById('message-button')
+    const imageInfo = document.getElementById('image-info')
 
     const button_activation = () => {
-        if (messageContent.value === '') {
+        if (messageContent.value === '' && imageInfo.value === null) {
             messageButton.classList.add('disabled')
         } else {
             messageButton.classList.remove('disabled')
