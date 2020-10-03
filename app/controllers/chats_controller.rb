@@ -5,8 +5,8 @@ class ChatsController < ApplicationController
     @room = Room.find(params[:room_id])
     @chat = Chat.new
     @chats = @room.chats.includes(:room).order(id: "DESC")
-    if (@room.created_at < Time.now - (1.hours))
-      Room.destroy_by("created_at < ?", Time.now - (1.minutes))
+    if (@room.created_at < Time.now - (24.hours))
+      Room.destroy_by("created_at < ?", Time.now - (24.hours))
       redirect_to root_path
     end
 
@@ -15,6 +15,8 @@ class ChatsController < ApplicationController
   def create
     @chat = Chat.create(chat_params)
     render json:{ chat: @chat }
+
+    ActionCable.server.broadcast 'room_channel', message: @message.template
   end
 
   private

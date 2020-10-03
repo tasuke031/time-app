@@ -2,8 +2,8 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
-    if @rooms.find_by("created_at < ?", Time.now - (1.hours))
-      Room.destroy_by("created_at < ?", Time.now - (1.hours))
+    if @rooms.find_by("created_at < ?", Time.now - (24.hours))
+      Room.destroy_by("created_at < ?", Time.now - (24.hours))
       redirect_to root_path
     end
   end
