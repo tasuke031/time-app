@@ -1,9 +1,9 @@
 <div class="container-form">
   <%= form_with model: @room, local: true do |f| %>
   <div class="input-group mb-3">
-    <%= f.text_field :name, class:"form-control", placeholder: 'ルーム名とルームの制限時間を入力してください', aria_label:"Recipient's username", aria_describedby:"button-addon2", required: true %>
+    <%= f.text_field :name, class:"form-control", placeholder: 'ルーム名を入力し制限時間を選択してください', aria_label:"Recipient's username", aria_describedby:"button-addon2", required: true %>
     <div class="input-group-append">
-    <%= f.number_field :chosen_time, class:"form-control", min: 1, max: 24  %>
+    <%= f.number_field :chosen_time, class:"form-control", required: true, min: 1, max: 24  %>
       <%= f.submit '作成', class:'btn btn-primary' %>
     </div>
   <% end %>

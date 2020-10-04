@@ -1,25 +1,18 @@
 class RoomsController < ApplicationController
+  include CheckExpiredRooms
   before_action :authenticate_user!, except: :index
 
   def index
     @room = Room.new
     @rooms = Room.all.order(id: 'desc')
-    @time_upped_rooms = Room.where("created_at < ?", Time.now - (24.hours))
-    if @time_upped_rooms.present?
-      @time_upped_rooms.destroy_all
-      redirect_to root_path, notice: "Room's over!!"
-    end
+    check_expired_room
   end
 
   def create
-    unless user_signed_in?
-      redirect_to new_session_path
-    end
+    redirect_to new_session_path  unless user_signed_in?
 
-    @room = Room.new(room_params)
-    if @room.save
-      redirect_to root_path
-    end
+    @room = Room.create(room_params)
+    redirect_to root_path
   end
 
   def show
@@ -31,8 +24,8 @@ class RoomsController < ApplicationController
       redirect_to root_path, notice: "Room's over!!"
     end
 
-    # @limitation_time = @room.chosen_time
-    if @room.created_at < (Time.now - (@room.chosen_time.hours))
+    @limitation_time = @room.chosen_time
+    if @room.created_at < (Time.now - (@limitation_time.hours))
       @room.destroy
       redirect_to root_path, notice: "Room's over!"
     end
