@@ -36,10 +36,9 @@ document.addEventListener('turbolinks:load', () => {
     scrollToBottom()
 
     const messageButton = document.getElementById('message-button')
-    const imageInfo = document.getElementById('image-info')
 
     const button_activation = () => {
-        if (messageContent.value === '' && imageInfo.value === null) {
+        if (messageContent.value === '') {
             messageButton.classList.add('disabled')
         } else {
             messageButton.classList.remove('disabled')
