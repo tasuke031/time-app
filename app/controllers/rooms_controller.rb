@@ -23,11 +23,19 @@ class RoomsController < ApplicationController
   end
 
   def show
+    begin
       @room = Room.find(params[:id])
       @messages = @room.messages.includes(:user).order(:id).last(100)
       @message = current_user.messages.build
     rescue
       redirect_to root_path, notice: "Room's over!!"
+    end
+
+    # @limitation_time = @room.chosen_time
+    if @room.created_at < (Time.now - (@room.chosen_time.hours))
+      @room.destroy
+      redirect_to root_path, notice: "Room's over!"
+    end
   end
 
   def show_additionally
@@ -39,7 +47,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name)
+    params.require(:room).permit(:name, :chosen_time)
   end
 
 end
