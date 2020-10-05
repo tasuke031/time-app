@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  include CheckExpiredRooms
+  include RoomsChecker
   before_action :authenticate_user!, except: :index
 
   def index

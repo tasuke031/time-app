@@ -1,4 +1,4 @@
-module CheckExpiredRooms
+module RoomsChecker
   extend ActiveSupport::Concern
 
   def check_expired_room
