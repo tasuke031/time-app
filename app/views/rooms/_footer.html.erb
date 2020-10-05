@@ -1,7 +1,7 @@
 <footer class="fixed-bottom" id="footer">
   <%= form_with model: [@room, @message] do |f| %>
     <div class="form-group" room-id=<%= @room.id %>>
-      <%= f.text_area :content, class: 'form-control', rows: 1, maxlength: '500' %>    
+      <%= f.text_area :content, class: 'form-control',placeholder: "メッセージを入力してください", rows: 1, maxlength: '500' %>
     </div>
 <div class="input-group">
     <label class="input-group-btn">
