@@ -1,4 +1,4 @@
-user_count = 3
+user_count = 2
 room_count = 2
 message_count = 500
 
@@ -10,7 +10,9 @@ ApplicationRecord.transaction do
   end
 
   room_count.times do |n|
-    Room.find_or_create_by(name: "room#{n + 1}")
+    Room.find_or_create_by(name: "room#{n + 1}") do |room|
+      room.chosen_time = 1
+    end
   end
 
   Message.destroy_all
