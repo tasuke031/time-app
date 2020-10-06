@@ -14,18 +14,18 @@ RSpec.describe "Users", type: :system do
       expect(page).to have_content('新規登録')
       # 新規登録画面へ遷移
       visit new_user_registration_path
-      # fill_inにはlabel要素の for= の値を指定、withには各ユーザー情報を渡す 
+      # fill_inには入力フォームのidの値を指定、withには各ユーザー情報を渡す 
       fill_in 'user_name', with: user.name
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: user.password
       fill_in 'user_password_confirmation', with: user.password
-      
+      # ログインボタンをクリックしたときにUserのレコードが1つ増えたことを確認
       expect{
         find('input[name="commit"]').click
       }.to change{ User.count }.by(1)
-
+      # ログイン後トップページへの遷移を確認
       expect(current_path).to eq root_path
-
+      # トップページの項目が変化していることを確認
       expect(page).to have_content('アカウント編集')
       expect(page).to have_content('ログアウト')
 
