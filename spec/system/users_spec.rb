@@ -2,8 +2,8 @@ require 'rails_helper'
 # type: :systemでSystem specであるとを明示的にする
 RSpec.describe "Users", type: :system do
   # user情報を持ったインスタンス変数を用意
+    let(:user){ FactoryBot.build(:user) }
   before do
-    @user = FactoryBot.build(:user)
   end
 
   context "ユーザー新規登録ができるとき" do
@@ -15,10 +15,10 @@ RSpec.describe "Users", type: :system do
       # 新規登録画面へ遷移
       visit new_user_registration_path
       # fill_inにはlabel要素の for= の値を指定、withには各ユーザー情報を渡す 
-      fill_in 'user_name', with: @user.name
-      fill_in 'user_email', with: @user.email
-      fill_in 'user_password', with: @user.password
-      fill_in 'user_password_confirmation', with: @user.password
+      fill_in 'user_name', with: user.name
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: user.password
+      fill_in 'user_password_confirmation', with: user.password
       
       expect{
         find('input[name="commit"]').click
@@ -50,6 +50,36 @@ RSpec.describe "Users", type: :system do
       }.not_to change{ User.count }
 
       expect(current_path).to eq user_registration_path
+    end
+  end
+
+  context "ログインに成功するとき" do
+    it "emailとpasswordが正しい組み合わせならログインできる" do
+      user.save
+      visit new_user_session_path
+      expect(current_path).to eq new_user_session_path
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: user.password
+      click_button 'ログイン'
+      expect(current_path).to eq root_path
+    end
+  end
+
+  context "ログインに失敗するとき" do
+    it "emailが空のとき" do
+      user.save
+      visit new_user_session_path
+      fill_in 'user_password', with: user.password
+      click_button 'ログイン'
+      expect(current_path).to eq user_session_path
+    end
+
+    it "passwordが空のとき" do
+      user.save
+      visit new_user_session_path
+      fill_in 'user_email', with: user.email
+      click_button 'ログイン'
+      expect(current_path).to eq user_session_path
     end
   end
 
