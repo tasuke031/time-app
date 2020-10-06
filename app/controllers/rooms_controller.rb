@@ -24,10 +24,15 @@ class RoomsController < ApplicationController
       redirect_to root_path, notice: "Room's over!!"
     end
 
-    @limitation_time = @room.chosen_time
-    if @room.created_at < (Time.now - (@limitation_time.hours))
-      @room.destroy
-      redirect_to root_path, notice: "Room's over!"
+
+    if @room.chosen_time == 0
+      if @room.created_at < (Time.now - 30.seconds)
+        @room.destroy
+        redirect_to root_path, notice: "Room's over!"
+      end
+    elsif @room.created_at < (Time.now - @room.chosen_time.hours)
+        @room.destroy
+        redirect_to root_path, notice: "Room's over!"
     end
   end
 

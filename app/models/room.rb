@@ -3,5 +3,5 @@ class Room < ApplicationRecord
 
   validates :name, presence: true
   validates :chosen_time, presence: true
-  validates :chosen_time, numericality: { only_integer: true ,greater_than: 0, less_than: 25}
+  validates :chosen_time, numericality: { only_integer: true ,greater_than_or_equal: 0, less_than: 25}
 end
