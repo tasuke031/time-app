@@ -10,7 +10,6 @@ class RoomsController < ApplicationController
 
   def create
     redirect_to new_session_path  unless user_signed_in?
-
     @room = Room.create(room_params)
     redirect_to root_path
   end
@@ -20,14 +19,9 @@ class RoomsController < ApplicationController
       @room = Room.find(params[:id])
       @messages = @room.messages.includes(:user).order(:id).last(100)
       @message = current_user.messages.build
+      check_test_or_expired_room(@room)
     rescue
       redirect_to root_path, notice: "Room's over!!"
-    end
-
-    @limitation_time = @room.chosen_time
-    if @room.created_at < (Time.now - (@limitation_time.hours))
-      @room.destroy
-      redirect_to root_path, notice: "Room's over!"
     end
   end
 
@@ -42,5 +36,4 @@ class RoomsController < ApplicationController
   def room_params
     params.require(:room).permit(:name, :chosen_time)
   end
-
 end

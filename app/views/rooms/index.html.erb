@@ -6,6 +6,9 @@
   <% @rooms.each do |room| %>
   <div class="alert alert-light">
     <%= link_to room.name, room_path(room) %>
+    <div class="room-time">
+      <%= (room.created_at + room.chosen_time.hour).strftime("%m月%d日 %H:%M") %> 終了
+    </div>
   </div>
   <% end %>
 </div>
