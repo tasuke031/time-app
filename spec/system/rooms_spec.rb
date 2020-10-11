@@ -29,16 +29,13 @@ RSpec.describe "Rooms", type: :system do
   end
 
   context "期限ぎれのルームにはアクセスできない" do
-    it "制限時間を0に設定し30秒後に作成したルームへアクセスすると時間切れでルートページにリダイレクトされる" do
+    it "制限時間を0に設定し30秒後に,作成したルームへアクセスすると時間切れでルートページにリダイレクトされる" do
+      @room = Room.create(name:"test", chosen_time:0, created_at: Time.now - 30.seconds)
       sign_in(user)
       expect(current_path).to eq root_path
       expect(page).to have_selector('input[value="作成"]')
-      fill_in 'room[name]', with: "test"
-      fill_in 'room[chosen_time]', with: 0
-      click_on '作成'
-      expect(page).to have_content "test"
-      sleep(30)
-      click_on "test"
+      expect(page).to have_content @room.name
+      click_on @room.name
       expect(current_path).to eq root_path
     end
   end
