@@ -9,7 +9,7 @@ ___
 ___
 
 ## URL
-https://furima-29319.herokuapp.com/
+https://time-app-29319.herokuapp.com/
 ___
 
 ## テスト用機能
